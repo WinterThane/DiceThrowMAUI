@@ -1,41 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DiceThrowMAUI.MainPage">
+             x:Class="DiceThrowMAUI.MainPage"
+             MaximumWidthRequest="700"
+             MaximumHeightRequest="700">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <!--Title-->
+        <Label Grid.Row="0"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               Text="Dice Throwing Game"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+        <Border Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                x:Name="PlayerFrame">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+                <Label Grid.Row="0"
+                       Text="{Binding MainPlayer.Name, Mode=OneWay}"
+                       TextColor="White"
+                       FontSize="16"
+                       HorizontalOptions="Start" />
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+                <Label Grid.Row="1"
+                       x:Name="PlayerDamageLabelText"
+                       TextColor="White"
+                       FontSize="16"
+                       HorizontalTextAlignment="Start" />
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                <Button Grid.Row="2"
+                        Text="Roll the dice"
+                        x:Name="PlayerThrowBtn"
+                        Clicked="PlayerThrow_Clicked"
+                        MaximumWidthRequest="150"
+                        MaximumHeightRequest="50"
+                        HorizontalOptions="Start" />
+            </Grid>
+        </Border>
 
-        </VerticalStackLayout>
-    </ScrollView>
+        <Border Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                x:Name="EnemyFrame">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Text="{Binding Rat.Name, Mode=OneWay}"
+                       TextColor="White"
+                       FontSize="16"
+                       HorizontalOptions="Start" />
+
+                <Label Grid.Row="1"
+                       x:Name="EnemyDamageLabelText"
+                       TextColor="White"
+                       FontSize="16"
+                       IsVisible="False"
+                       HorizontalOptions="Start" />
+
+                <Button Grid.Row="2"
+                        Text="Roll the dice"
+                        x:Name="EnemyThrowBtn"
+                        MaximumWidthRequest="150"
+                        MaximumHeightRequest="50"
+                        HorizontalOptions="Start"
+                        IsVisible="False" />
+
+            </Grid>
+        </Border>
+
+        <ScrollView Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+            <Label x:Name="CombatTextLabel"
+                   TextColor="White" />
+        </ScrollView>
+    </Grid>
 
 </ContentPage>
