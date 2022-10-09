@@ -32,6 +32,7 @@ public partial class MainPage : ContentPage
 	private void InitiateEnemy()
 	{
         Rat = new EnemyRat("Giant Rat", 20, 2, 4, 10, "enemyrat.png");
+		EnemyDetailsLabel.Text = StringFunctions.MakeEnemyDetails(Rat);
     }
 
 	private async void PlayerThrow_Clicked(object sender, EventArgs e)

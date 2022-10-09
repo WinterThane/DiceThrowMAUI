@@ -1,9 +1,5 @@
-﻿using DiceThrowLogic.Actors.Player;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DiceThrowLogic.Actors.Enemy;
+using DiceThrowLogic.Actors.Player;
 
 namespace DiceThrowLogic.DiceFunctions
 {
@@ -17,6 +13,18 @@ namespace DiceThrowLogic.DiceFunctions
             details += "Strength: " + "\n";
             details += "Dexterity: " + "\n";
             details += "Intelligence: " + "\n";
+
+            return details;
+        }
+
+        public static string MakeEnemyDetails(EnemyRat enemy)
+        {
+            var details = string.Empty;
+
+            details += "Damage: " + enemy.MinDamage.ToString() + " - " + enemy.MaxDamage.ToString() + "\n";
+            details += "Experience: " + enemy.ExperiencePoints.ToString() + "\n";
+            details += "No. of kills: " + "\n";
+            details += "Lore: " + "\n";
 
             return details;
         }
