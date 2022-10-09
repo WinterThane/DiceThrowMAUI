@@ -4,7 +4,7 @@
     {
         public int ExperiencePoints { get; set; }
 
-        public EnemyRat(string name, int health, int minDmg, int maxDmg, int exp) : base(name, health, minDmg, maxDmg)
+        public EnemyRat(string name, int health, int minDmg, int maxDmg, int exp, ImageSource portrait) : base(name, health, minDmg, maxDmg, portrait)
         {
             ExperiencePoints = exp;
         }

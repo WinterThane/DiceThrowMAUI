@@ -3,100 +3,145 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DiceThrowMAUI.MainPage">
 
+    <ContentPage.Resources>
+        <Style x:Key="frameStyle" TargetType="Border">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="StrokeThickness" Value="3" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 0,20,20,0" />
+        </Style>
+        <Style x:Key="nameLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="10, 5, 0, 5" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+        <Style x:Key="detailsLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="10, 5, 0, 5" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+        <Style x:Key="damageLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="TextColor" Value="RosyBrown" />
+            <Setter Property="Margin" Value="0, 10, 0, 0" />
+        </Style>
+        <Style x:Key="rollButton" TargetType="Button">
+            <Setter Property="WidthRequest" Value="130" />
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="0, 0, 0, 5" />
+        </Style>
+    </ContentPage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         
         <!--Title-->
         <Label Grid.Row="0"
                Grid.Column="0"
-               Grid.ColumnSpan="2"
+               Grid.ColumnSpan="3"
                Text="Dice Throwing Game"
                FontSize="24"
+               Margin="10"
                FontAttributes="Bold"
                TextColor="White"
                HorizontalOptions="Center"
                VerticalOptions="Center" />
 
+        <!--Left frame-->
         <Border Grid.Row="1"
                 Grid.Column="0"
-                Grid.ColumnSpan="3"
-                x:Name="PlayerFrame">
+                x:Name="PlayerFrame"
+                Style="{StaticResource frameStyle}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0"
-                       Text="{Binding MainPlayer.Name, Mode=OneWay}"
-                       TextColor="White"
-                       FontSize="16"
-                       HorizontalOptions="Start" />
-
+                <VerticalStackLayout Grid.Row="0">
+                    <Label Text="{Binding MainPlayer.Name, Mode=OneWay}"
+                           Style="{StaticResource nameLabel}" />
+                    <Label x:Name="PlayerDetailsLabel" 
+                           Style="{StaticResource detailsLabel}" />
+                </VerticalStackLayout>
+                
+                <Image Grid.Row="0"
+                       Source="{Binding MainPlayer.Portrait}"
+                       WidthRequest="120"
+                       HeightRequest="120"
+                       HorizontalOptions="End"
+                       VerticalOptions="Start" />
+                
                 <Label Grid.Row="1"
                        x:Name="PlayerDamageLabelText"
-                       TextColor="White"
-                       FontSize="16"
-                       HorizontalTextAlignment="Start" />
+                       Style="{StaticResource damageLabel}" />
 
                 <Button Grid.Row="2"
                         Text="Roll the dice"
                         x:Name="PlayerThrowBtn"
                         Clicked="PlayerThrow_Clicked"
-                        MaximumWidthRequest="150"
-                        MaximumHeightRequest="50"
-                        HorizontalOptions="Start" />
+                        Style="{StaticResource rollButton}" />
             </Grid>
         </Border>
+        
+        <!--Middle-->
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Text="mid"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
 
+        <!--Right frame-->
         <Border Grid.Row="1"
-                Grid.Column="1"
-                Grid.ColumnSpan="3"
-                x:Name="EnemyFrame">
+                Grid.Column="2"
+                x:Name="EnemyFrame"
+                Style="{StaticResource frameStyle}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0"
-                       Text="{Binding Rat.Name, Mode=OneWay}"
-                       TextColor="White"
-                       FontSize="16"
-                       HorizontalOptions="Start" />
+                <VerticalStackLayout Grid.Row="0">
+                    <Label Text="{Binding Rat.Name, Mode=OneWay}"
+                           Style="{StaticResource nameLabel}" />
+                    <Label x:Name="EnemyDetailsLabel" 
+                           Style="{StaticResource detailsLabel}" />
+                </VerticalStackLayout>
+
+                <Image Grid.Row="0"
+                       Source="{Binding Rat.Portrait}"
+                       WidthRequest="120"
+                       HeightRequest="120"
+                       HorizontalOptions="End"
+                       VerticalOptions="Start" />
 
                 <Label Grid.Row="1"
                        x:Name="EnemyDamageLabelText"
-                       TextColor="White"
-                       FontSize="16"
-                       IsVisible="False"
-                       HorizontalOptions="Start" />
-
-                <Button Grid.Row="2"
-                        Text="Roll the dice"
-                        x:Name="EnemyThrowBtn"
-                        MaximumWidthRequest="150"
-                        MaximumHeightRequest="50"
-                        HorizontalOptions="Start"
-                        IsVisible="False" />
-
+                       Style="{StaticResource damageLabel}" />
             </Grid>
         </Border>
 
         <Button Grid.Row="2"
                 Grid.Column="0"
-                Grid.ColumnSpan="2" 
+                Grid.ColumnSpan="3" 
                 Text="Clear Combat Text"
                 x:Name="ClearCombatTextBtn"
                 Clicked="ClearCombatTextBtn_Clicked"
@@ -106,7 +151,7 @@
 
         <ScrollView Grid.Row="3"
                     Grid.Column="0"
-                    Grid.ColumnSpan="2"
+                    Grid.ColumnSpan="3"
                     Margin="10">
             <Label x:Name="CombatTextLabel"
                    TextColor="White" />

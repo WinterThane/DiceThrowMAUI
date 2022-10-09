@@ -8,7 +8,7 @@ namespace DiceThrowMAUI;
 
 public partial class App : Application
 {
-    const int WindowWidth = 700;
+    const int WindowWidth = 800;
     const int WindowHeight = 700;
 
     public App()

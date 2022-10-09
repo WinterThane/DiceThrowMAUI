@@ -14,13 +14,25 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
         InitializeComponent();
-        MainPlayer = new Player("Winter", 100, 5, 10, 100);
-		Rat = new EnemyRat("Normal Rat", 20, 2, 4, 10);
+		InitiatePlayer();
+		InitiateEnemy();
 
         CombatText.ListOfTextRows = new List<string>();
 		
 		BindingContext = this;
 	}
+
+	private void InitiatePlayer()
+	{
+        MainPlayer = new Player("Winter", 100, 100, 5, 10, "playerwarrior.png");
+        PlayerFrame.BackgroundColor = new Color(50, 50, 50, 255);
+        PlayerDetailsLabel.Text = StringFunctions.MakePlayerDetails(MainPlayer);       
+    }
+
+	private void InitiateEnemy()
+	{
+        Rat = new EnemyRat("Giant Rat", 20, 2, 4, 10, "enemyrat.png");
+    }
 
 	private async void PlayerThrow_Clicked(object sender, EventArgs e)
 	{
@@ -31,7 +43,7 @@ public partial class MainPage : ContentPage
 		PlayerTurn = false;
 		ChangeTurn();
 
-		PeriodicTimer timer = new PeriodicTimer(TimeSpan.FromSeconds(2));
+		PeriodicTimer timer = new(TimeSpan.FromSeconds(Config.ENEMY_TURN));
 		while (await timer.WaitForNextTickAsync())
 		{
 			EnemyAttack();
@@ -58,16 +70,18 @@ public partial class MainPage : ContentPage
 		if (PlayerTurn)
 		{
 			PlayerThrowBtn.IsVisible = true;
-			EnemyThrowBtn.IsVisible = false;
             PlayerDamageLabelText.IsVisible = false;
             EnemyDamageLabelText.IsVisible = true;
+			PlayerFrame.BackgroundColor = new Color(50, 50, 50, 255);
+            EnemyFrame.BackgroundColor = new Color(0, 0, 0, 255);
         }
 		else
 		{
 			PlayerThrowBtn.IsVisible = false;
-			EnemyThrowBtn.IsVisible = true;
-			PlayerDamageLabelText.IsVisible = true;
-            EnemyDamageLabelText.IsVisible = false;
+			PlayerDamageLabelText.IsVisible = true;            
+			EnemyDamageLabelText.IsVisible = false;
+            EnemyFrame.BackgroundColor = new Color(50, 50, 50, 255);
+            PlayerFrame.BackgroundColor = new Color(0, 0, 0, 255);
         }
 
         CombatTextLabel.Text = CombatTextAll;
