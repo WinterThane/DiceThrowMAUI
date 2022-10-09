@@ -42,7 +42,8 @@ public partial class MainPage : ContentPage
         PlayerDamageLabelText.Text = $"You hit {Rat.Name} for " + damage.ToString() + " damage.";
         CombatTextAll = CombatText.CombatTextResult(PlayerDamageLabelText.Text);
 		PlayerTurn = false;
-		ChangeTurn();
+		_ = RotateSword("left");
+        ChangeTurn();
 
 		PeriodicTimer timer = new(TimeSpan.FromSeconds(Config.ENEMY_TURN));
 		while (await timer.WaitForNextTickAsync())
@@ -61,6 +62,7 @@ public partial class MainPage : ContentPage
         EnemyDamageLabelText.Text = $"{Rat.Name} hits you for " + damage.ToString() + " damage.";
         CombatTextAll = CombatText.CombatTextResult(EnemyDamageLabelText.Text);
         PlayerTurn = true;
+        _ = RotateSword("right");
         ChangeTurn();
 
         SemanticScreenReader.Announce(EnemyDamageLabelText.Text);
@@ -95,6 +97,18 @@ public partial class MainPage : ContentPage
 		CombatTextAll = string.Empty;
         CombatTextLabel.Text = CombatTextAll;
         SemanticScreenReader.Announce(CombatTextLabel.Text);
+    }
+
+	private async Task RotateSword(string way)
+	{
+		if (way.Equals("left"))
+		{
+            await SwordTurnPic.RotateYTo(180, 500);
+        }
+		if (way.Equals("right"))
+		{
+            await SwordTurnPic.RotateYTo(0, 500);
+        }
     }
 }
 

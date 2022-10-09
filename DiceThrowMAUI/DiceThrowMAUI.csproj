@@ -41,12 +41,17 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\PlayerPortraits\*" />
 		<MauiImage Include="Resources\Images\EnemyPortraits\*" />
+		<MauiImage Include="Resources\Images\UI\*" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\UI\swordturn.png" />
 	</ItemGroup>
 
 	<ItemGroup>
