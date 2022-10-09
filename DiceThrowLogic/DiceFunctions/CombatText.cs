@@ -22,5 +22,10 @@
 
             return result;
         }
+
+        public static void CleanCombatText()
+        {
+            ListOfTextRows.Clear();
+        }
     }
 }

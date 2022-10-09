@@ -73,5 +73,13 @@ public partial class MainPage : ContentPage
         CombatTextLabel.Text = CombatTextAll;
         SemanticScreenReader.Announce(CombatTextLabel.Text);
     }
+
+	private void ClearCombatTextBtn_Clicked(object sender, EventArgs e)
+	{
+		CombatText.CleanCombatText();
+		CombatTextAll = string.Empty;
+        CombatTextLabel.Text = CombatTextAll;
+        SemanticScreenReader.Announce(CombatTextLabel.Text);
+    }
 }
 
