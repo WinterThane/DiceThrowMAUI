@@ -18,7 +18,7 @@ public partial class MainPage : ContentPage
 		InitiateEnemy();
 
         CombatText.ListOfTextRows = new List<string>();
-		
+
 		BindingContext = this;
 	}
 

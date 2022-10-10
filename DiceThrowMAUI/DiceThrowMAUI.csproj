@@ -51,6 +51,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\UI\dicefive.png" />
+	  <None Remove="Resources\Images\UI\dicefour.png" />
+	  <None Remove="Resources\Images\UI\diceone.png" />
+	  <None Remove="Resources\Images\UI\dicesix.png" />
+	  <None Remove="Resources\Images\UI\dicethree.png" />
+	  <None Remove="Resources\Images\UI\dicetwo.png" />
+	  <None Remove="Resources\Images\UI\sixdice.png" />
 	  <None Remove="Resources\Images\UI\swordturn.png" />
 	</ItemGroup>
 

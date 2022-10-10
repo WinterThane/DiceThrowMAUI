@@ -12,6 +12,7 @@
         <Style x:Key="nameLabel" TargetType="Label">
             <Setter Property="TextColor" Value="White" />
             <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="Margin" Value="10, 5, 0, 5" />
             <Setter Property="HorizontalOptions" Value="Start" />
         </Style>
@@ -105,8 +106,11 @@
                    x:Name="SwordTurnPic"
                    Source="swordturn.png" />
 
-            <Label Grid.Row="1"
-                   Text="mid aaaaa" />
+            <Image Grid.Row="1"
+                   x:Name="DiceMiddlePic"
+                   Source="dicethree.png"
+                   WidthRequest="80"
+                   HeightRequest="80" />
 
             <Button Grid.Row="2" 
                     x:Name="PlayerThrowBtn"
