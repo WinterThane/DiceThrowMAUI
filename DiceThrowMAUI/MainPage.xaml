@@ -88,6 +88,10 @@
                        VerticalOptions="Start" />
 
                 <Label Grid.Row="1"
+                       x:Name="PlayerDiceRollLabelText"
+                       Style="{StaticResource damageLabel}" />
+
+                <Label Grid.Row="2"
                        x:Name="PlayerDamageLabelText"
                        Style="{StaticResource damageLabel}" />
             </Grid>
@@ -95,7 +99,8 @@
         
         <!--Middle-->
         <Grid Grid.Row="1"
-              Grid.Column="1">
+              Grid.Column="1"
+              x:Name="MiddleGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -108,7 +113,8 @@
 
             <Image Grid.Row="1"
                    x:Name="DiceMiddlePic"
-                   Source="dicethree.png"
+                   Source="{Binding DieRollPic}"
+                   IsVisible="False"
                    WidthRequest="80"
                    HeightRequest="80" />
 
