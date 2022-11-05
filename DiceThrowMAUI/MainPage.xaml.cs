@@ -11,8 +11,9 @@ public partial class MainPage : ContentPage
 	public EnemyRat Rat { get; set; }
 	public string CombatTextAll { get; set; }
 	public ImageSource DieRollPic { get; set; }
+	private int currentEnemyHP { get; set; }
 
-    public MainPage()
+	public MainPage()
 	{
         InitializeComponent();
 		InitiatePlayer();
@@ -26,15 +27,17 @@ public partial class MainPage : ContentPage
 
 	private void InitiatePlayer()
 	{
-        MainPlayer = new Player("Winter", 100, 100, 5, 10, "playerwarrior.png");
+        MainPlayer = new Player("Winter", 100, 100, 100, 100, 5, 10, "playerwarrior.png");
         PlayerFrame.BackgroundColor = new Color(50, 50, 50, 255);
         PlayerDetailsLabel.Text = StringFunctions.MakePlayerDetails(MainPlayer);       
     }
 
 	private void InitiateEnemy()
 	{
-        Rat = new EnemyRat("Giant Rat", 20, 2, 4, 10, "enemyrat.png");
-		EnemyDetailsLabel.Text = StringFunctions.MakeEnemyDetails(Rat);
+        Rat = new EnemyRat("Giant Rat", 50, 2, 4, 10, "enemyrat.png");
+		currentEnemyHP = Rat.MaxHealth;
+        EnemyDetailsLabel.Text = StringFunctions.MakeEnemyDetails(Rat);
+        EnemyCurrentHPText.Text = currentEnemyHP.ToString() + "/" + Rat.MaxHealth.ToString();
     }
 
 	private async void PlayerThrow_Clicked(object sender, EventArgs e)
@@ -44,6 +47,12 @@ public partial class MainPage : ContentPage
 		CombatTextAll = CombatText.CombatTextResult(PlayerDiceRollLabelText.Text);
 
         var damage = CalculateDamage.MakeDamage(MainPlayer.MinDamage + die, MainPlayer.MaxDamage + die);
+
+		int enemyCurrentHP = 146;
+		var removeHealthWidth = (int)Math.Round((double)(100 * damage) / enemyCurrentHP);
+		EnemyCurrentHP.WidthRequest -= removeHealthWidth;
+        
+
         PlayerDamageLabelText.Text = $"You hit {Rat.Name} for " + damage.ToString() + " damage.";
         CombatTextAll = CombatText.CombatTextResult(PlayerDamageLabelText.Text);
 		PlayerTurn = false;

@@ -7,7 +7,7 @@
         <Style x:Key="frameStyle" TargetType="Border">
             <Setter Property="Margin" Value="10" />
             <Setter Property="StrokeThickness" Value="3" />
-            <Setter Property="StrokeShape" Value="RoundRectangle 0,20,20,0" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 0, 20, 20, 0" />
         </Style>
         <Style x:Key="nameLabel" TargetType="Label">
             <Setter Property="TextColor" Value="White" />
@@ -61,7 +61,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Center" />
 
-        <!--Left frame-->
+        <!--Left - Player - frame-->
         <Border Grid.Row="1"
                 Grid.Column="0"
                 x:Name="PlayerFrame"
@@ -76,6 +76,28 @@
                 <VerticalStackLayout Grid.Row="0">
                     <Label Text="{Binding MainPlayer.Name, Mode=OneWay}"
                            Style="{StaticResource nameLabel}" />
+
+                    <Grid Margin="10, 0, 0, 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+
+                        <Rectangle Grid.Row="0"
+                                   WidthRequest="150"
+                                   HeightRequest="20"
+                                   BackgroundColor="Gray"
+                                   HorizontalOptions="Start"
+                                   Stroke="white"
+                                   StrokeThickness="2" />
+
+                        <Rectangle Grid.Row="0"
+                                   WidthRequest="146"
+                                   HeightRequest="16"
+                                   Margin="2, 0, 0, 0"
+                                   BackgroundColor="Red"
+                                   HorizontalOptions="Start" />
+                    </Grid>
+
                     <Label x:Name="PlayerDetailsLabel" 
                            Style="{StaticResource detailsLabel}" />
                 </VerticalStackLayout>
@@ -126,7 +148,7 @@
 
         </Grid>
 
-        <!--Right frame-->
+        <!--Right - Enemy - frame-->
         <Border Grid.Row="1"
                 Grid.Column="2"
                 x:Name="EnemyFrame"
@@ -141,6 +163,34 @@
                 <VerticalStackLayout Grid.Row="0">
                     <Label Text="{Binding Rat.Name, Mode=OneWay}"
                            Style="{StaticResource nameLabel}" />
+
+                    <Grid Margin="10, 0, 0, 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               x:Name="EnemyCurrentHPText"
+                               Margin="60, -1, 0, 0"
+                               ZIndex="1" />
+
+                        <Rectangle Grid.Row="0"
+                                   WidthRequest="150"
+                                   HeightRequest="20"
+                                   BackgroundColor="Gray"
+                                   HorizontalOptions="Start"
+                                   Stroke="white"
+                                   StrokeThickness="2" />
+
+                        <Rectangle Grid.Row="0"
+                                   x:Name="EnemyCurrentHP"
+                                   WidthRequest="146"
+                                   HeightRequest="16"
+                                   Margin="2, 0, 0, 0"
+                                   BackgroundColor="Red"
+                                   HorizontalOptions="Start" />
+                    </Grid>
+
                     <Label x:Name="EnemyDetailsLabel" 
                            Style="{StaticResource detailsLabel}" />
                 </VerticalStackLayout>
@@ -158,6 +208,7 @@
             </Grid>
         </Border>
 
+        <!--Bottom Combat Text-->
         <Button Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="3" 
